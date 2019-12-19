@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {    
        Parser parser = new Parser();
        
-       int r = parser.evaluar("[13+15-10,23,[15,12-5+6],18-20, 105]");
+       int r = parser.evaluar("[1+5-1,0,1,5,[1,2-5+6],18-20,2]");
        //int r = parser.evaluar(",5+9-5+1-9,4+4-4]");
        
         if (parser.getError() != 0)

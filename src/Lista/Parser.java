@@ -7,8 +7,6 @@ import java.util.List;
 public class Parser {
     private Cinta cinta;
     private Analex analex;
-    private int Resultado;
-    private int ResultadoParcial;
     
     private int error;          //Si error=0, la expresión es correcta
     
@@ -38,6 +36,7 @@ public class Parser {
             case 6: return "Espero un corchete cerrado ']' Amigo.";
             case 7: return "No me gustan los numeros negativos al inicio Amigo.";
             case 8: return "Al parecer continua el array pero hace falta un ']'.";
+            case 9: return "Este elemento del arreglo no tiene valor";
             default: return "Error Desconocido";
         }
     }
@@ -77,14 +76,14 @@ public class Parser {
     
     private int opciones(){
         if (this.analex.Preanalisis().getNom()==Token.NUM) {
-            match(this.analex.Preanalisis().getNom());
+            match(Token.NUM);
             int valorActual = this.analex.Preanalisis().getAtr();
             int valorAdelante = masOperaciones(0);
             return valorActual + valorAdelante;
         }else if (this.analex.Preanalisis().getNom() == Token.CA) {
             return (-1)*lista();
         }else if (this.analex.Preanalisis().getNom() == Token.COMA) {
-            return 0;
+            setError(9);
         }else if (this.analex.Preanalisis().getNom() == Token.MAS || this.analex.Preanalisis().getNom() == Token.MENOS){
             setError(7);
             return -100;
